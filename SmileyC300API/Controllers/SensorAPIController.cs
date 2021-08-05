@@ -31,7 +31,7 @@ namespace SmileyC300API.Controllers
             return Ok(model);
         }
 
-        [HttpGet("{num}")]
+        [HttpGet("{id}")]
         public IActionResult GetSensor(int id)
         {
             Sensor model = _dbContext.Sensor.Where(w => w.SensorId == id).FirstOrDefault();
