@@ -75,6 +75,16 @@ namespace SmileyC300API.Controllers
             return Ok(userProfile);
         }
 
+        [HttpGet("UserId")]
+        public IActionResult GetUserId()
+        {
+            var userIdList = _dbContext.SmileyUser
+                     .Select(s => s.UserId)
+                 .ToList();
+
+            return Ok(userIdList);
+        }
+
         [HttpPost("Login")]
         public IActionResult Login(LoginUser user)
         {
