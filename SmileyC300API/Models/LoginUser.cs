@@ -8,11 +8,8 @@ namespace SmileyC300API.Models
 {
     public class LoginUser
     {
-        [Required(ErrorMessage = "User ID cannot be empty!")]
         public string UserId { get; set; }
 
-        [Required(ErrorMessage = "Empty password not allowed!")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
 
     }
