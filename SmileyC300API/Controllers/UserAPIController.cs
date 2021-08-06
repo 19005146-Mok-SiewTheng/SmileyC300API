@@ -114,12 +114,19 @@ namespace SmileyC300API.Controllers
         [HttpPost("Create")]
         public IActionResult Create(SmileyUser user)
         {
-            _dbContext.SmileyUser.Add(user);
+            if (UniqueUsername(user.UserId))
+            {
+                _dbContext.SmileyUser.Add(user);
 
-            if (_dbContext.SaveChanges() == 1)
-                return Ok(1);
-            else
-                return Ok(0);
+                if (_dbContext.SaveChanges() == 1)
+                    return Ok(1);
+                else
+                    return Ok(0);
+            }
+            else {
+                return Ok(-1);
+            }
+            
         }
 
 
@@ -192,16 +199,16 @@ namespace SmileyC300API.Controllers
                 return Json(false);
         }
 
-        [HttpGet("CheckUsername/{userId}")]
-        public IActionResult UniqueUsername(string userId)
+        
+        private bool UniqueUsername(string userId)
         {
             var userProfile = _dbContext.SmileyUser.Where(w => w.UserId.Equals(userId)).FirstOrDefault();
 
             if (userProfile == null)
             {
-                return Ok(true);
+                return true;
             }
-            return Ok(false);
+            return false;
         }
 
     }
