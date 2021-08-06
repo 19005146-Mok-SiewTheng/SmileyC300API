@@ -96,11 +96,11 @@ namespace SmileyC300API.Controllers
         }
 
         [HttpDelete("Delete")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string username)
         {
             DbSet<Authorisation> dbs = _dbContext.Authorisation;
 
-            Authorisation tOrder = dbs.Where(mo => mo.AccessPointId == id).FirstOrDefault();
+            Authorisation tOrder = dbs.Where(mo => mo.AccessPointId == id && mo.UserId == username).FirstOrDefault();
 
             if (tOrder != null)
             {
